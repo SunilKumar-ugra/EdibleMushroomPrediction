@@ -1,6 +1,5 @@
 from mushrooms.constants import *
 from mushrooms.utils import read_yaml, create_directories
-# from mushrooms.constants import PARAMS_FILE_PATH,CONFIG_FILE_PATH
 from mushrooms.entity import DataIngestionConfig
 
 
