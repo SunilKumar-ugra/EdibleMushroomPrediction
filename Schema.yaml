@@ -1,0 +1,11 @@
+COLUMNS:
+  cap-shape: int64
+  gill-attachment: int64
+  gill-color: int64
+  stem-height: float64
+  stem-width: int64
+  stem-color: int64
+  season: float64
+  class: int64
+TARGET_COLUMN:
+  name: class
