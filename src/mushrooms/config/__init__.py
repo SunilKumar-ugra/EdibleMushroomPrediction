@@ -1,6 +1,8 @@
 from mushrooms.constants import *
 from mushrooms.utils import read_yaml, create_directories
-from mushrooms.entity import DataIngestionConfig,DataValidationConfig
+from mushrooms.entity import (DataIngestionConfig,
+                              DataValidationConfig,
+                              DataTransformationConfig)
 
 
 class ConfigurationManager:
@@ -12,7 +14,7 @@ class ConfigurationManager:
     ):
 
         self.config = read_yaml(config_filepath)
-        #self.params = read_yaml(params_filepath)
+        self.params = read_yaml(params_filepath)
         self.schema = read_yaml(schema_filepath)
         
 
@@ -48,3 +50,17 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+    
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation
+
+        create_directories([config.root_dir])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=config.root_dir,
+            data_path=config.data_path,
+            categorical_feature_path=config.categorical_feature_path,
+            categorical_json_path=config.categorical_json_path
+        )
+
+        return data_transformation_config
