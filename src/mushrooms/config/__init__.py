@@ -2,7 +2,8 @@ from mushrooms.constants import *
 from mushrooms.utils import read_yaml, create_directories
 from mushrooms.entity import (DataIngestionConfig,
                               DataValidationConfig,
-                              DataTransformationConfig)
+                              DataTransformationConfig,
+                              ModelTrainerConfig)
 
 
 class ConfigurationManager:
