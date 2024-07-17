@@ -1,7 +1,7 @@
 from mushrooms import logger
+
+
 from mushrooms.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
-
-
 STAGE_NAME = "Data Ingestion Stage"
 try:
    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
@@ -14,7 +14,6 @@ except Exception as e:
 
 
 from mushrooms.pipeline.stage_02_data_validation import DataValidationTrainingPipeline
-
 STAGE_NAME = "Data Validation stage"
 try:
    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
@@ -24,8 +23,9 @@ try:
 except Exception as e:
         logger.exception(e)
         raise e
-from mushrooms.pipeline.stage_03_data_transformation import DataTransformationTrainingPipeline
 
+
+from mushrooms.pipeline.stage_03_data_transformation import DataTransformationTrainingPipeline
 STAGE_NAME = "Data Transformation stage"
 try:
    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
@@ -35,3 +35,17 @@ try:
 except Exception as e:
         logger.exception(e)
         raise e
+
+
+from mushrooms.pipeline.stage_04_model_trainer import ModelTrainerTrainingPipeline
+STAGE_NAME = "Model Trainer stage"
+try: 
+   logger.info(f"*******************")
+   logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+   model_trainer = ModelTrainerTrainingPipeline()
+   model_trainer.main()
+   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e
+
