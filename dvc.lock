@@ -5,8 +5,8 @@ stages:
     deps:
     - path: config/config.yaml
       hash: md5
-      md5: 4828a56bb668f4bbd287276bda6ecc4b
-      size: 656
+      md5: ba1319d0e6e6a5e1337f3acded769609
+      size: 1232
     - path: src/mushrooms/pipeline/stage_01_data_ingestion.py
       hash: md5
       md5: bc08fdb6d670dd770a9a48890effe230
@@ -29,8 +29,8 @@ stages:
       size: 3171031
     - path: config/config.yaml
       hash: md5
-      md5: 4828a56bb668f4bbd287276bda6ecc4b
-      size: 656
+      md5: ba1319d0e6e6a5e1337f3acded769609
+      size: 1232
     - path: src/mushrooms/pipeline/stage_02_data_validation.py
       hash: md5
       md5: 59e018ae8cb7e553d29816ca658eab8d
@@ -49,8 +49,8 @@ stages:
       size: 3171031
     - path: config/config.yaml
       hash: md5
-      md5: 4828a56bb668f4bbd287276bda6ecc4b
-      size: 656
+      md5: ba1319d0e6e6a5e1337f3acded769609
+      size: 1232
     - path: src/mushrooms/pipeline/stage_03_data_transformation.py
       hash: md5
       md5: f1d5c49385072acf2258e5991a06fe73
@@ -58,9 +58,61 @@ stages:
     outs:
     - path: artifacts/data_transformation/test.csv
       hash: md5
-      md5: 71ff69765a11b9b862c26bedb90cd5ab
-      size: 1737062
+      md5: c6f2989cb353d3bd556d17c8a44f1b1f
+      size: 1739769
     - path: artifacts/data_transformation/train.csv
       hash: md5
-      md5: 7a33b79e3d8bc6bbe835dfedff199d41
-      size: 5215437
+      md5: aa2e5f92bb70b29e55a7659cb3b7b2ec
+      size: 5212730
+  model_trainer:
+    cmd: python src/mushrooms/pipeline/stage_04_model_trainer.py
+    deps:
+    - path: artifacts/data_transformation/test.csv
+      hash: md5
+      md5: c6f2989cb353d3bd556d17c8a44f1b1f
+      size: 1739769
+    - path: artifacts/data_transformation/train.csv
+      hash: md5
+      md5: aa2e5f92bb70b29e55a7659cb3b7b2ec
+      size: 5212730
+    - path: config/config.yaml
+      hash: md5
+      md5: ba1319d0e6e6a5e1337f3acded769609
+      size: 1232
+    - path: src/mushrooms/pipeline/stage_04_model_trainer.py
+      hash: md5
+      md5: 3daf5f7efceb80cf048a19355c95742f
+      size: 908
+    outs:
+    - path: artifacts/model_trainer/model.joblib
+      hash: md5
+      md5: ed9b8b97452266c538d1f05ed5dffaa3
+      size: 24695145
+  model_evaluation:
+    cmd: python src/mushrooms/pipeline/stage_05_model_evaluation.py
+    deps:
+    - path: artifacts/data_transformation/test.csv
+      hash: md5
+      md5: c6f2989cb353d3bd556d17c8a44f1b1f
+      size: 1739769
+    - path: artifacts/data_transformation/train.csv
+      hash: md5
+      md5: aa2e5f92bb70b29e55a7659cb3b7b2ec
+      size: 5212730
+    - path: artifacts/model_trainer/model.joblib
+      hash: md5
+      md5: ed9b8b97452266c538d1f05ed5dffaa3
+      size: 24695145
+    - path: config/config.yaml
+      hash: md5
+      md5: ba1319d0e6e6a5e1337f3acded769609
+      size: 1232
+    - path: src/mushrooms/pipeline/stage_05_model_evaluation.py
+      hash: md5
+      md5: 32d87e79cbbd5a990cd5c97f1d18a802
+      size: 886
+    outs:
+    - path: artifacts/model_evaluation/metrics.json
+      hash: md5
+      md5: b121d558b61ae904d92a9bc314579bc7
+      size: 151
