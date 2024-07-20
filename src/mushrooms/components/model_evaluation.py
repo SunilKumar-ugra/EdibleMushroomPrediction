@@ -48,11 +48,11 @@ class ModelEvaluation:
 
         with mlflow.start_run():
 
-            predicted_qualities = model.predict(test_x)
+            
             y_train_pred=model.predict(train_x)
             y_test_pred=model.predict(test_x)
 
-            (rmse, mae, r2) = self.eval_metrics(test_y, predicted_qualities)
+            
             
             #training   performance
             (trn_acc,trn_f1,trn_precission,trn_recall)=self.classification_performace_matric(train_y,y_train_pred,'weighted')
@@ -75,7 +75,7 @@ class ModelEvaluation:
             ###########################################
             #Log Params
             ###########################################
-            mlflow.log_params(self.config.all_params)
+            #mlflow.log_params(self.config.all_params)
             ###########################################
             
 
